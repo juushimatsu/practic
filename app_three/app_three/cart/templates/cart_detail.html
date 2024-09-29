@@ -1,0 +1,18 @@
+<!-- cart_detail.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="cart_body">
+    {% for item in cart %}
+    <div class="item_cart">
+        <p>Товар: {{ item.product.name }}</p>
+        <p>Количество: {{ item.quantity }}</p>
+        <p>Цена: {{ item.price }} руб.</p>
+        <p>Общая стоимость: {{ item.total_price }} руб.</p>
+        <img src="{{ item.product.image.url }}" width="100px">
+        <a href="{% url 'cart_remove' item.product.id %}">Удалить</a>
+    </div>
+    {% endfor %}
+</div>
+<p>Сумма корзины: {{ cart.get_total_price }} руб.</p>
+<a href="{% url 'cart_clear' %}">Очистить корзину</a>
+{% endblock %}

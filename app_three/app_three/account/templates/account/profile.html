@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Пользователь: {{ request.user.username }}</h2>
+<h2>Пол: {{ user.gender }}</h2>
+<h2>Город: {{ user.city }}</h2>
+<h2>Страна: {{ user.country }}</h2>
+<a style="color: aqua" href="{% url 'profile_edit' %}">Редактировать профиль</a>
+<a href="{% url 'delete_profile' %}" style="color: red;">Удалить профиль и пользователя</a>
+{% endblock %}

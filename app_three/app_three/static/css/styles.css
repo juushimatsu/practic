@@ -1,0 +1,60 @@
+.navigation {
+    background-color: #0d6efd;
+}
+
+.product-grid {
+    margin-left: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Настрой минимальную ширину карточки */
+    gap: 20px; /* Отступ между элементами */
+}
+/*
+.product-card {
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    padding: 15px; 
+    text-align: center; 
+    background-color: #f9f9f9; 
+}
+
+.product-card img {
+    max-width: 100%; 
+    height: auto; 
+}
+*/
+
+.product-card {
+    border: 1px solid #ccc; /* Рамка вокруг карточки */
+    border-radius: 8px; /* Закругление углов */
+    padding: 15px; /* Отступ внутри карточки */
+    text-align: center; /* Центрирование текста */
+    background-color: #f9f9f9; /* Цвет фона карточки */
+    overflow: hidden; /* Скрывает избыточное содержимое */
+    height: 400px; /* Установи высоту карточки */
+}
+.product-card a:hover {
+    color: aqua;
+    transition: 1s;
+}
+.product-card a:not(:hover) {
+    color: black;
+    transition: 1.5s;
+}
+.product-card h3,
+.product-card p {
+    margin: 0; /* Убираем отступы */
+    padding: 5px 0; /* Добавляем отступы только по вертикали */
+}
+
+.product-card p {
+    display: -webkit-box; /* Для поддержки многострочного текста */
+    -webkit-box-orient: vertical; /* Вертикальная ориентация */
+    overflow: hidden; /* Скрываем лишний текст */
+    -webkit-line-clamp: 3; /* Количество отображаемых строк */
+    line-clamp: 3; /* Поддержка для современных браузеров */
+}
+
+.product-card img {
+    max-width: 100%; /* Адаптивный размер изображения */
+    height: auto; /* Сохранение пропорций */
+}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="GET" class="d-flex mt-1" action="{% url 'products' %}">
+        <input class="form-control me-1 w-25" type="text" name="q" placeholder="Поиск продукта">
+        <button class="btn btn-primary" type="submit">Поиск</button>
+    </form>
+    <a href="{% url 'cart_detail' %}">Корзина <span id="cart-count">{{ cart|length }}</span></a>
+    <h1>Продукты</h1>
+    <h2>Одежда</h2>
+    <div class="product-grid">
+        {% for clothing_item in clothing_items %}
+            <div class="product-card">
+                <h3><a style="" href="{% url 'product_detail' clothing_item.id %}">{{ clothing_item.name }}</a></h3>
+                <img src="{{ clothing_item.image.url }}" alt="{{ clothing_item.name }}">
+                <p>{{ clothing_item.description }}</p>
+                <p>Цена: {{ clothing_item.price }} руб.</p>
+                <a href="{% url 'cart_add' clothing_item.id %}?update_quantity=true">Добавить в корзину</a>
+            </div>
+        {% empty %}
+            <p>Одежда не найдена</p>
+        {% endfor %}
+    </div>
+    
+    <h2>Аксессуары</h2>
+    <div class="product-grid">
+        {% for accessory_item in accessory_items %}
+            <div class="product-card">
+                <h3><a style="" href="{% url 'product_detail' accessory_item.id %}">{{ accessory_item.name }}</a></h3>
+                <img src="{{ accessory_item.image.url }}" alt="{{ accessory_item.name }}">
+                <p>{{ accessory_item.description }}</p>
+                <p>Цена: {{ accessory_item.price }} руб.</p>
+                <a href="{% url 'cart_add' accessory_item.id %}?update_quantity=true">Добавить в корзину</a>
+            </div>
+        {% empty %}
+            <p>Аксессуары не найдены</p>
+        {% endfor %}
+    </div>
+    <style>
+        .product_block {
+            margin-left: 3%;
+        }
+        a {
+            color: black;
+        }
+        h1,h2 {
+            text-align: center;
+        }
+        span {
+            color: grey;
+        }
+        img {
+            max-width: 100px;
+        }
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).on('click', '.add-to-cart', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(data) {
+                $('#cart-count').html(data.cart_count);
+                $(this).hide();  // Прячем кнопку после добавления товара
+            }
+        });
+    });
+</script>
+
+    
+{% endblock %}
+

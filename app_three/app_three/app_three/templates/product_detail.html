@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="product_detail_block">
+        <h2>{{ product.name }} ({{ product_type }})</h2>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p>{{ product.description }}</p>
+        <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+        <a href="{% url 'cart_detail' %}">Корзина <span id="cart-count">{{ cart|length }}</span></a>
+        <a href="{% url 'cart_add' product.id %}?update_quantity=true">+</a>
+        <a href="{% url 'cart_remove' product.id %}">-</a>
+
+        <a href="{% url 'products' %}">Back to Products</a>
+    </div>
+
+    <style>
+        .product_detail_block {
+            margin-left: 3%;
+            width: 600px;
+            height: 1000px;
+            a {
+                color:black;
+            }
+            img {
+                width: 550px;
+            }
+        }
+    </style>
+{% endblock %}
